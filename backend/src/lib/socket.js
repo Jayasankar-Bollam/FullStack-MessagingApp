@@ -8,8 +8,12 @@ const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
     origin: process.env.FRONTEND_URL,
-    credentials:true,
+    credentials: true,
   },
+  // Add these options:
+  transports: ["websocket", "polling"],
+  pingTimeout: 60000,
+  pingInterval: 25000,
 });
 
 export function getReceiverSocketId(userId) {
